@@ -1,6 +1,8 @@
 #include "main.h"
 
 
+int epollfd;
+
 int sfd;
 ThreadPool* pool = new ThreadPool(3);
 

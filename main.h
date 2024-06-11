@@ -23,4 +23,6 @@
 #define server_port 8888
 #define MAX_EVENTS 10 
 
+extern int epollfd;
+
 #endif

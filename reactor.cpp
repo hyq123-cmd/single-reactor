@@ -19,7 +19,6 @@ int ServerInit()
 int AddEpollTree(int fd)
 {
     static bool flag = true;
-    static int epollfd = -1;
     static epoll_event ev;
     if(flag)
     {
@@ -50,7 +49,10 @@ void HandleClient(int cfd)
         printf("receive from client-%d is : %s\n", cfd, buf);
         fflush(stdout);
         std::this_thread::sleep_for(std::chrono::seconds(10));
-        if(!strcmp(buf, "close"))  close(cfd);
+        if(!strcmp(buf, "close")){
+        epoll_ctl(epollfd, EPOLL_CTL_DEL, cfd, NULL);
+		close(cfd);
+	}
         else write(cfd, buf, strlen(buf));
     }
 }
