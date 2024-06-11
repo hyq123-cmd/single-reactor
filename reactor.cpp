@@ -48,11 +48,11 @@ void HandleClient(int cfd)
     if(len > 0){
         printf("receive from client-%d is : %s\n", cfd, buf);
         fflush(stdout);
-        std::this_thread::sleep_for(std::chrono::seconds(10));
+        //std::this_thread::sleep_for(std::chrono::seconds(10));
         if(!strcmp(buf, "close")){
-        epoll_ctl(epollfd, EPOLL_CTL_DEL, cfd, NULL);
-		close(cfd);
-	}
+            epoll_ctl(epollfd, EPOLL_CTL_DEL, cfd, NULL);
+            close(cfd);
+	    }
         else write(cfd, buf, strlen(buf));
     }
 }
