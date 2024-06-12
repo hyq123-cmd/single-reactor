@@ -28,7 +28,7 @@ int main()
 		for(int n = 0; n < nfds; ++n)
 		{
 			if(events[n].data.fd == sfd){
-				int cfd = accept(sfd, (struct sockaddr *) NULL, NULL);
+				int cfd = accept(sfd, NULL, NULL);
 				AddEpollTree(cfd);
 			}
 			else if(events[n].events & EPOLLIN)
